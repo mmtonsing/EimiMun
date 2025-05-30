@@ -37,6 +37,11 @@ const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
     })
 
 const app = express();
+
+if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+}
+
 app.set('query parser', 'extended');
 
 app.set('view engine', 'ejs');
