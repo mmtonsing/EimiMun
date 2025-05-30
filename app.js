@@ -71,7 +71,7 @@ const sessionConfig = {
     cookie: {
         httpOnly: true,
         //should be used when deploying
-        // secure: true,
+        secure: process.env.NODE_ENV === 'production',
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,//converting milli seconds to one week and adding to the date now so that it expires in one week
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
