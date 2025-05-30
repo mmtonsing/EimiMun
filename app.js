@@ -30,7 +30,6 @@ const MongoStore = require('connect-mongo');
 const dbUrl = process.env.DB_URL
 // const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp'
     mongoose.connect(dbUrl)
-   
     .then(() => {
         console.log("Database connected")
     })
@@ -71,7 +70,7 @@ const sessionConfig = {
     cookie: {
         httpOnly: true,
         //should be used when deploying
-        // secure: true,
+        secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,//converting milli seconds to one week and adding to the date now so that it expires in one week
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -159,6 +158,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error',{err})
 })
 
-app.listen(3000, () => {
-    console.log('listening to port 3000')
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Serving on port${port}`)
 })
